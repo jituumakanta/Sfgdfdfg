@@ -46,16 +46,11 @@ private static String DatabaseName="mydatabse";
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ColoumName2, DataBean.getName()); // Contact Name
-        values.put(ColoumName3, "7689362"); // Contact Phone
-        values.put(ColoumName4, "pune"); // Contact Phone
+        values.put(ColoumName3, DataBean.getID()); // Contact Phone
+        values.put(ColoumName4, DataBean.getNumber()); // Contact Phone
 
         // Inserting Row
         db.insert(TableName, null, values);
-
-        ContentValues values1 = new ContentValues();
-        values.put(ColoumName2, "jit"); // Contact Name
-        values.put(ColoumName3, "999999"); // Contact Phone
-        values.put(ColoumName4, "delhi"); // Contact Phone
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
