@@ -114,7 +114,8 @@ private static String DatabaseName="mydatabse";
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                contactList.add(cursor.getString(1));
+                contactList.add(cursor.getString(2));
+                contactList.add(cursor.getString(3));
             } while (cursor.moveToNext());
         }
         Toast.makeText(context, "This is my Toast message!"+contactList, Toast.LENGTH_LONG).show();
