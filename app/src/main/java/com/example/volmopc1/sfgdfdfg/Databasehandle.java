@@ -30,7 +30,7 @@ private static String DatabaseName="mydatabse";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CreateTable = "CREATE TABLE " + TableName + "(" + ColoumName1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + ColoumName2 + " TEXT," + ColoumName3 + " TEXT," + ColoumName4+" TEXT"+")";
+        String CreateTable = "CREATE TABLE " + TableName + "(" + ColoumName1 + " INTEGER PRIMARY KEY ," + ColoumName2 + " TEXT," + ColoumName3 + " TEXT," + ColoumName4+" TEXT"+")";
         db.execSQL(CreateTable);
     }
 
@@ -45,7 +45,7 @@ private static String DatabaseName="mydatabse";
     void addRow() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ColoumName2, "fff"); // Contact Name
+        values.put(ColoumName2, DataBean.getName()); // Contact Name
         values.put(ColoumName3, "7689362"); // Contact Phone
         values.put(ColoumName4, "pune"); // Contact Phone
 

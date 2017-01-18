@@ -8,24 +8,24 @@ public class DataBean {
 
     //private variables
     int _id;
-    String _name;
-    String _phone_number;
+     static String name;
+    String number;
 
     // Empty constructor
     public DataBean(){
 
     }
     // constructor
-    public DataBean(int id, String name, String _phone_number){
+    public DataBean(int id, String name, String number){
         this._id = id;
-        this._name = name;
-        this._phone_number = _phone_number;
+        this.name = name;
+        this.number = number;
     }
 
     // constructor
-    public DataBean(String name, String _phone_number){
-        this._name = name;
-        this._phone_number = _phone_number;
+    public DataBean(String name, String number){
+        this.name = name;
+        this.number = number;
     }
     // getting ID
     public int getID(){
@@ -38,22 +38,22 @@ public class DataBean {
     }
 
     // getting name
-    public String getName(){
-        return this._name;
+    public static String getName(){
+        return name;
     }
 
     // setting name
     public void setName(String name){
-        this._name = name;
+        this.name = name;
     }
 
     // getting phone number
     public String getPhoneNumber(){
-        return this._phone_number;
+        return this.number;
     }
 
     // setting phone number
-    public void setPhoneNumber(String phone_number){
-        this._phone_number = phone_number;
+    public void setPhoneNumber(String number){
+        this.number = number;
     }
 }
