@@ -12,5 +12,6 @@ public class MainActivity extends AppCompatActivity {
         Databasehandle v=new Databasehandle(this);
         v.addRow();
         v.getData();
+        v.getAllContacts();
     }
 }

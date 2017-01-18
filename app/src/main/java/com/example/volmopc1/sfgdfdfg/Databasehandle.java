@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by volmopc1 on 18-01-2017.
@@ -50,6 +51,11 @@ private static String DatabaseName="mydatabse";
 
         // Inserting Row
         db.insert(TableName, null, values);
+
+        ContentValues values1 = new ContentValues();
+        values.put(ColoumName2, "jit"); // Contact Name
+        values.put(ColoumName3, "999999"); // Contact Phone
+        values.put(ColoumName4, "delhi"); // Contact Phone
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
@@ -89,12 +95,31 @@ private static String DatabaseName="mydatabse";
                     cursor.getColumnIndexOrThrow(ColoumName1));
             itemIds.add(itemId);
         }
-        Toast.makeText(context, "This is my Toast message!"+itemIds, Toast.LENGTH_LONG).show();
+       // Toast.makeText(context, "This is my Toast message!"+itemIds, Toast.LENGTH_LONG).show();
         cursor.close();
 
+    }
 
 
 
+
+    public List getAllContacts() {
+        List contactList = new ArrayList();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TableName;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                contactList.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+        Toast.makeText(context, "This is my Toast message!"+contactList, Toast.LENGTH_LONG).show();
+        // return contact list
+        return contactList;
     }
 
 }
