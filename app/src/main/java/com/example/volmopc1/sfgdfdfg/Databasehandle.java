@@ -15,22 +15,26 @@ import java.util.List;
  */
 
 public class Databasehandle extends SQLiteOpenHelper {
-private static String DatabaseName="mydatabse";
-    private static int DatabaseVersion=1;
-    private static String TableName="mydatabse";
-    private static String ColoumName1="ID";
-    private static String ColoumName2="NAME";
-    private static String ColoumName3="NUMBER";
-    private static String ColoumName4="AREA";
+
+    //**
+    private static String DatabaseName = "mydatabse";
+    private static int DatabaseVersion = 1;
+    private static String TableName = "person";
+    private static String ColoumName1 = "ID";
+    private static String ColoumName2 = "NAME";
+    private static String ColoumName3 = "NUMBER";
+    private static String ColoumName4 = "AREA";
     Context context;
+    //**
+
     public Databasehandle(Context context) {
         super(context, DatabaseName, null, DatabaseVersion);
-        this.context=context;
+        this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CreateTable = "CREATE TABLE " + TableName + "(" + ColoumName1 + " INTEGER PRIMARY KEY ," + ColoumName2 + " TEXT," + ColoumName3 + " TEXT," + ColoumName4+" TEXT"+")";
+        String CreateTable = "CREATE TABLE " + TableName + "(" + ColoumName1 + " INTEGER PRIMARY KEY ," + ColoumName2 + " TEXT," + ColoumName3 + " TEXT," + ColoumName4 + " TEXT" + ")";
         db.execSQL(CreateTable);
     }
 
@@ -42,7 +46,7 @@ private static String DatabaseName="mydatabse";
         onCreate(db);
     }
 
-    void addRow() {
+    void addRow(DataBean DataBean) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ColoumName2, DataBean.getName()); // Contact Name
@@ -68,7 +72,7 @@ private static String DatabaseName="mydatabse";
 
 // Filter results WHERE "title" = 'My Title'
         String selection = ColoumName2 + " = ?";
-        String[] selectionArgs = { "fff" };
+        String[] selectionArgs = {"fff"};
 
 // How you want the results sorted in the resulting Cursor
         String sortOrder =
@@ -85,21 +89,19 @@ private static String DatabaseName="mydatabse";
         );
 
         ArrayList itemIds = new ArrayList<>();
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             String itemId = cursor.getString(
                     cursor.getColumnIndexOrThrow(ColoumName1));
             itemIds.add(itemId);
         }
-       // Toast.makeText(context, "This is my Toast message!"+itemIds, Toast.LENGTH_LONG).show();
+        // Toast.makeText(context, "This is my Toast message!"+itemIds, Toast.LENGTH_LONG).show();
         cursor.close();
 
     }
 
 
-
-
-    public List getAllContacts() {
-        List contactList = new ArrayList();
+    public List<DataBean> getAllContacts() {
+        List<DataBean> contactList = new ArrayList<DataBean>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TableName;
 
@@ -109,11 +111,15 @@ private static String DatabaseName="mydatabse";
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                contactList.add(cursor.getString(2));
-                contactList.add(cursor.getString(3));
+                DataBean contact = new DataBean();
+                contact.setID(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setNumber(cursor.getString(2));
+                // Adding contact to list
+                contactList.add(contact);
             } while (cursor.moveToNext());
         }
-        Toast.makeText(context, "This is my Toast message!"+contactList, Toast.LENGTH_LONG).show();
+
         // return contact list
         return contactList;
     }
