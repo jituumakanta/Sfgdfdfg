@@ -7,17 +7,16 @@ package com.example.volmopc1.sfgdfdfg;
 public class DataBean {
 
     //private variables
-    int _id;
+    int id;
      static String name;
     String number;
 
     // Empty constructor
     public DataBean(){
-
     }
     // constructor
     public DataBean(int id, String name, String number){
-        this._id = id;
+        this.id = id;
         this.name = name;
         this.number = number;
     }
@@ -29,12 +28,12 @@ public class DataBean {
     }
     // getting ID
     public int getID(){
-        return this._id;
+        return this.id;
     }
 
     // setting id
     public void setID(int id){
-        this._id = id;
+        this.id = id;
     }
 
     // getting name
@@ -48,12 +47,12 @@ public class DataBean {
     }
 
     // getting phone number
-    public String getPhoneNumber(){
+    public String getNumber(){
         return this.number;
     }
 
     // setting phone number
-    public void setPhoneNumber(String number){
+    public void setNumber(String number){
         this.number = number;
     }
 }
