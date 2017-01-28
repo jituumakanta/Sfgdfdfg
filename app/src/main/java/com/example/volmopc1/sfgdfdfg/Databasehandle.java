@@ -19,11 +19,17 @@ public class Databasehandle extends SQLiteOpenHelper {
     //**
     private static String DatabaseName = "mydatabse";
     private static int DatabaseVersion = 1;
+
     private static String TableName = "person";
+
     private static String ColoumName1 = "ID";
     private static String ColoumName2 = "NAME";
     private static String ColoumName3 = "NUMBER";
     private static String ColoumName4 = "AREA";
+
+    private static String CreateEntity = "CREATE TABLE " + TableName + "(" + ColoumName1 + " INTEGER PRIMARY KEY ," + ColoumName2 + " TEXT," + ColoumName3 + " TEXT," + ColoumName4 + " TEXT" + ")";
+    private String CreateNewTable = "DROP TABLE IF EXISTS " + TableName;
+
     Context context;
     //**
 
@@ -34,13 +40,12 @@ public class Databasehandle extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CreateTable = "CREATE TABLE " + TableName + "(" + ColoumName1 + " INTEGER PRIMARY KEY ," + ColoumName2 + " TEXT," + ColoumName3 + " TEXT," + ColoumName4 + " TEXT" + ")";
-        db.execSQL(CreateTable);
+        db.execSQL(CreateEntity);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + TableName);
+        db.execSQL(CreateNewTable);
 
         // Create tables again
         onCreate(db);
@@ -53,48 +58,45 @@ public class Databasehandle extends SQLiteOpenHelper {
         values.put(ColoumName3, DataBean.getID()); // Contact Phone
         values.put(ColoumName4, DataBean.getNumber()); // Contact Phone
 
-        // Inserting Row
         db.insert(TableName, null, values);
-        //2nd argument is String containing nullColumnHack
-        db.close(); // Closing database connection
+        db.close();
     }
+
+    public void updateData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ColoumName2, "ghvhf");
+
+        // Which row to update, based on the title
+        String selection =ColoumName1 + " = ?";
+        String[] selectionArgs = { String.valueOf(DataBean.getID()) };
+
+        int count = db.update(TableName, values, selection, selectionArgs);
+
+    }
+
 
     void getData() {
         SQLiteDatabase db = this.getReadableDatabase();
-// Define a projection that specifies which columns from the database
-// you will actually use after this query.
-        String[] projection = {
-                ColoumName1,
-                ColoumName2,
-                ColoumName3,
-                ColoumName4
-        };
 
-// Filter results WHERE "title" = 'My Title'
+        String[] projection = {ColoumName1, ColoumName2, ColoumName3, ColoumName4};
         String selection = ColoumName2 + " = ?";
-        String[] selectionArgs = {"fff"};
-
-// How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                ColoumName1 + " DESC";
-
-        Cursor cursor = db.query(
-                TableName,                     // The table to query
-                projection,                               // The columns to return
-                selection,                                // The columns for the WHERE clause
-                selectionArgs,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
-        );
+        String[] selectionArgs = {"Srinivas"};
+        String sortOrder = ColoumName1 + " DESC";
+        //String[] d={String.valueOf(ColoumName1)};
+        Cursor cursor = db.query(TableName, projection, selection, selectionArgs, null, null, sortOrder);
 
         ArrayList itemIds = new ArrayList<>();
         while (cursor.moveToNext()) {
-            String itemId = cursor.getString(
-                    cursor.getColumnIndexOrThrow(ColoumName1));
+            String itemId = cursor.getString(cursor.getColumnIndexOrThrow(ColoumName3));
             itemIds.add(itemId);
         }
-        // Toast.makeText(context, "This is my Toast message!"+itemIds, Toast.LENGTH_LONG).show();
+//int d=(Integer.parseInt(cursor.getString(0)));
+       // Contact contact = new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+
+        Toast.makeText(context, "This is my Toast message!"+itemIds, Toast.LENGTH_LONG).show();
+      //  Toast.makeText(context, "This is my Toast message!"+d, Toast.LENGTH_LONG).show();
+
         cursor.close();
 
     }

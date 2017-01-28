@@ -14,15 +14,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Databasehandle v=new Databasehandle(this);
 
+        DataBean a1=new DataBean("Ravi", "1");
+        DataBean a2=new DataBean("Srinivas", "2");
+        DataBean a3=new DataBean("Tommy", "3");
+        DataBean a4=new DataBean("Karthik", "4");
+        DataBean a5=new DataBean(5, "my","6778");
 
-
-        v.addRow(new DataBean("Ravi", "1"));
-        v.addRow(new DataBean("Srinivas", "2"));
-        v.addRow(new DataBean("Tommy", "3"));
-        v.addRow(new DataBean("Karthik", "4"));
+        v.addRow(a1);
+        v.addRow(a2);
+        v.addRow(a3);
+        v.addRow(a4);
+        v.addRow(a5);
 
         v.getData();
-        v.getAllContacts();
+       // v.getAllContacts();
 
 
         List<DataBean> dataBean = v.getAllContacts();
