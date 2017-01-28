@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         DataBean a5=new DataBean(9, "jitu","6778","pune");
         DataBean a6=new DataBean(10, "pradeep","7882","bengaluru");
         DataBean a7=new DataBean(11, "rahim","7","delhi");
+        DataBean a8=new DataBean(13, "apple","768","bbsr");
 
        /* v.createRow(a1);
         v.createRow(a2);
@@ -28,10 +29,17 @@ public class MainActivity extends AppCompatActivity {
         v.createRow(a4);*/
         v.createRow(a5);
         v.createRow(a6);
-        //v.getAllContacts();
+        v.createRow(a7);
+        v.createRow(a8);
+        v.getAllContacts();
         v.getData();
-    /*    v.getData();
-       // v.getAllContacts();
+        //v.deleteContact();
+        v.updateData();
+
+
+
+
+    /*
 
 
         List<DataBean> dataBean = v.getAllContacts();

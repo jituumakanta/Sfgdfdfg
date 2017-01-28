@@ -67,11 +67,14 @@ public class Databasehandle extends SQLiteOpenHelper {
     public void updateData() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ColoumName2, "ghvhf");
+        values.put(ColoumName2, "ravi");
 
         // Which row to update, based on the title
-        String selection = ColoumName1 + " = ?";
-        String[] selectionArgs = {String.valueOf(DataBean.getID())};
+        String selection = ColoumName2 + " = ?";
+
+        String[] selectionArgs = { "rahim" };
+        //or
+       // String[] selectionArgs = {String.valueOf(DataBean.getID())};
 
         int count = db.update(TableName, values, selection, selectionArgs);
 
@@ -88,15 +91,15 @@ public class Databasehandle extends SQLiteOpenHelper {
         //String[] d={String.valueOf(ColoumName1)};
         Cursor cursor = db.query(TableName, projection, selection, selectionArgs, null, null, sortOrder);
 
-        ArrayList itemIds = new ArrayList<>();
+        ArrayList numbers = new ArrayList<>();
         while (cursor.moveToNext()) {
             String number = cursor.getString(cursor.getColumnIndexOrThrow(ColoumName3));
-            itemIds.add(number);
+            numbers.add(number);
         }
 //int d=(Integer.parseInt(cursor.getString(0)));
         // Contact contact = new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
 
-        Toast.makeText(context, "This is my Toast message!" + itemIds, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "This is my Toast message!" + numbers, Toast.LENGTH_LONG).show();
         //  Toast.makeText(context, "This is my Toast message!"+d, Toast.LENGTH_LONG).show();
 
         cursor.close();
@@ -127,6 +130,19 @@ public class Databasehandle extends SQLiteOpenHelper {
       //  Toast.makeText(context, "This is my Toast message!" + contactList, Toast.LENGTH_LONG).show();
         // return contact list
         return contactList;
+    }
+
+
+    public void deleteContact() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selection = ColoumName2 + " = ?";
+        String[] selectionArgs = { "pradeep" };
+        //or
+       // String[] selectionArgs = new String[]{String.valueOf(DataBean.getID())};
+
+        db.delete(TableName, selection,selectionArgs);
+        db.close();
     }
 
 }
