@@ -14,19 +14,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Databasehandle v=new Databasehandle(this);
 
-        DataBean a1=new DataBean("Ravi", "1");
+        /*DataBean a1=new DataBean("Ravi", "1");
         DataBean a2=new DataBean("Srinivas", "2");
         DataBean a3=new DataBean("Tommy", "3");
-        DataBean a4=new DataBean("Karthik", "4");
-        DataBean a5=new DataBean(5, "my","6778");
+        DataBean a4=new DataBean("Karthik", "4");*/
+        DataBean a5=new DataBean(9, "jitu","6778","pune");
+       // DataBean a6=new DataBean(10, "pradeep","7882","bengaluru");
 
-        v.addRow(a1);
-        v.addRow(a2);
-        v.addRow(a3);
-        v.addRow(a4);
-        v.addRow(a5);
-
-        v.getData();
+       /* v.createRow(a1);
+        v.createRow(a2);
+        v.createRow(a3);
+        v.createRow(a4);*/
+        v.createRow(a5);
+       // v.createRow(a6);
+        v.getAllContacts();
+    /*    v.getData();
        // v.getAllContacts();
 
 
@@ -38,5 +40,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Name: ", log);
 
 
-    }}
+    }*/
+    }
 }

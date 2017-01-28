@@ -41,6 +41,7 @@ public class Databasehandle extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CreateEntity);
+
     }
 
     @Override
@@ -51,25 +52,26 @@ public class Databasehandle extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addRow(DataBean DataBean) {
+    void createRow(DataBean DataBean) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(ColoumName1, DataBean.getID());
         values.put(ColoumName2, DataBean.getName()); // Contact Name
-        values.put(ColoumName3, DataBean.getID()); // Contact Phone
+        values.put(ColoumName3, DataBean.getNumber());
         values.put(ColoumName4, DataBean.getNumber()); // Contact Phone
 
         db.insert(TableName, null, values);
         db.close();
     }
 
-    public void updateData(){
+    public void updateData() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ColoumName2, "ghvhf");
 
         // Which row to update, based on the title
-        String selection =ColoumName1 + " = ?";
-        String[] selectionArgs = { String.valueOf(DataBean.getID()) };
+        String selection = ColoumName1 + " = ?";
+        String[] selectionArgs = {String.valueOf(DataBean.getID())};
 
         int count = db.update(TableName, values, selection, selectionArgs);
 
@@ -92,10 +94,10 @@ public class Databasehandle extends SQLiteOpenHelper {
             itemIds.add(itemId);
         }
 //int d=(Integer.parseInt(cursor.getString(0)));
-       // Contact contact = new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+        // Contact contact = new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
 
-        Toast.makeText(context, "This is my Toast message!"+itemIds, Toast.LENGTH_LONG).show();
-      //  Toast.makeText(context, "This is my Toast message!"+d, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "This is my Toast message!" + itemIds, Toast.LENGTH_LONG).show();
+        //  Toast.makeText(context, "This is my Toast message!"+d, Toast.LENGTH_LONG).show();
 
         cursor.close();
 
@@ -119,9 +121,10 @@ public class Databasehandle extends SQLiteOpenHelper {
                 contact.setNumber(cursor.getString(2));
                 // Adding contact to list
                 contactList.add(contact);
+                Toast.makeText(context, "This is my Toast message!" + Integer.parseInt(cursor.getString(0))+" "+cursor.getString(1)+" "+cursor.getString(2), Toast.LENGTH_LONG).show();
             } while (cursor.moveToNext());
         }
-
+      //  Toast.makeText(context, "This is my Toast message!" + contactList, Toast.LENGTH_LONG).show();
         // return contact list
         return contactList;
     }
