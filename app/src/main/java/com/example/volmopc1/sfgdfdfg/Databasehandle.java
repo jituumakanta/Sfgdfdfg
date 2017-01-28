@@ -83,15 +83,15 @@ public class Databasehandle extends SQLiteOpenHelper {
 
         String[] projection = {ColoumName1, ColoumName2, ColoumName3, ColoumName4};
         String selection = ColoumName2 + " = ?";
-        String[] selectionArgs = {"Srinivas"};
+        String[] selectionArgs = {"jitu"};
         String sortOrder = ColoumName1 + " DESC";
         //String[] d={String.valueOf(ColoumName1)};
         Cursor cursor = db.query(TableName, projection, selection, selectionArgs, null, null, sortOrder);
 
         ArrayList itemIds = new ArrayList<>();
         while (cursor.moveToNext()) {
-            String itemId = cursor.getString(cursor.getColumnIndexOrThrow(ColoumName3));
-            itemIds.add(itemId);
+            String number = cursor.getString(cursor.getColumnIndexOrThrow(ColoumName3));
+            itemIds.add(number);
         }
 //int d=(Integer.parseInt(cursor.getString(0)));
         // Contact contact = new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));

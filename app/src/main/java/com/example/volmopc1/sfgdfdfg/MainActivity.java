@@ -19,15 +19,17 @@ public class MainActivity extends AppCompatActivity {
         DataBean a3=new DataBean("Tommy", "3");
         DataBean a4=new DataBean("Karthik", "4");*/
         DataBean a5=new DataBean(9, "jitu","6778","pune");
-       // DataBean a6=new DataBean(10, "pradeep","7882","bengaluru");
+        DataBean a6=new DataBean(10, "pradeep","7882","bengaluru");
+        DataBean a7=new DataBean(11, "rahim","7","delhi");
 
        /* v.createRow(a1);
         v.createRow(a2);
         v.createRow(a3);
         v.createRow(a4);*/
         v.createRow(a5);
-       // v.createRow(a6);
-        v.getAllContacts();
+        v.createRow(a6);
+        //v.getAllContacts();
+        v.getData();
     /*    v.getData();
        // v.getAllContacts();
 
